@@ -16,10 +16,10 @@ o arquivo "Exercicio.xlsx" que será consumido ja estará nesse diretório
 
 #### Criando build e rodando o projeto:
 ```
-Dentro do diretório learn-go rode o comando:
+Dentro do diretório learn-go rode o comando(existem modos de buildar para outros SOs, olhar a documentação do Go):
     go build
 
-Um arquivo executavel para o seu sistema será criado.
+Um arquivo executavel para o seu sistema operacional será criado.
 Rode esse arquivo e se tudo ocorrer como esperado o arquivo Resultado.json será criado
 
 Obs. Lembrando que o executavel e o arquivo Exercicio.xlsx precisam estar no mesmo diretório
