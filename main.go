@@ -1,7 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/360EntSecGroup-Skylar/excelize/v2"
+)
 
 func main() {
-	fmt.Printf("Criando projeto!!!!")
+	f, err := excelize.OpenFile("Exercicio.xlsx")
+
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+
+	rows, err := f.GetRows("DePara")
+	fmt.Println(rows)
 }
