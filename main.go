@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"strconv"
 
 	"github.com/360EntSecGroup-Skylar/excelize/v2"
@@ -18,9 +19,7 @@ type Cliente struct {
 type typeContas []int
 
 func main() {
-
 	var clientes []Cliente
-
 	f, err := excelize.OpenFile("Exercicio.xlsx")
 
 	if err != nil {
@@ -31,7 +30,6 @@ func main() {
 	rows, err := f.GetRows("DePara")
 
 	for nRow, row := range rows {
-
 		if nRow > 0 {
 			var nameClient = row[0]
 			var codeClient = row[1]
@@ -40,17 +38,23 @@ func main() {
 		}
 	}
 	jsonFormatado, _ := json.MarshalIndent(clientes, "", "  ")
+	ioutil.WriteFile("Resultado.json", jsonFormatado, 0644)
 
-	_ = ioutil.WriteFile("Resultado.json", jsonFormatado, 0644)
+	file, err := os.Stat("Resultado.json")
+	if err != nil {
+		fmt.Println("Ocorreu um erro ao salvar o arquivo:", err)
+		return
+	}
 
-	fmt.Println(string(jsonFormatado))
+	if file != nil {
+		fmt.Println("Arquivo Resultado.json criado com sucesso!!!")
+	}
 }
 
 func searchClientContas(codClient string) typeContas {
-
 	var contas typeContas
-
 	f, err := excelize.OpenFile("Exercicio.xlsx")
+
 	if err != nil {
 		fmt.Println("Error:", err)
 	}
