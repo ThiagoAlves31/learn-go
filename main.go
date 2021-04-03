@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"strconv"
 
 	"github.com/360EntSecGroup-Skylar/excelize/v2"
@@ -33,12 +34,15 @@ func main() {
 
 		if nRow > 0 {
 			var nameClient = row[0]
-			var codeCliente = row[1]
+			var codeClient = row[1]
 			result := searchClientContas(nameClient)
-			clientes = append(clientes, Cliente{Cliente: nameClient, CodigoSistemaXYZ: codeCliente, Contas: result})
+			clientes = append(clientes, Cliente{Cliente: nameClient, CodigoSistemaXYZ: codeClient, Contas: result})
 		}
 	}
 	jsonFormatado, _ := json.MarshalIndent(clientes, "", "  ")
+
+	_ = ioutil.WriteFile("Resultado.json", jsonFormatado, 0644)
+
 	fmt.Println(string(jsonFormatado))
 }
 
