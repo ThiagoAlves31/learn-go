@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"strconv"
 
@@ -37,7 +38,8 @@ func main() {
 			clientes = append(clientes, Cliente{Cliente: nameClient, CodigoSistemaXYZ: codeCliente, Contas: result})
 		}
 	}
-	fmt.Println(clientes)
+	jsonFormatado, _ := json.MarshalIndent(clientes, "", "  ")
+	fmt.Println(string(jsonFormatado))
 }
 
 func searchClientContas(codClient string) typeContas {
